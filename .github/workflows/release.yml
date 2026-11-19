@@ -68,7 +68,7 @@ jobs:
           node-version-file: .nvmrc
       - name: Changelog (Conventional Commits)
         run: npx --yes conventional-changelog-cli@5 -p conventionalcommits -r 2 -o CHANGELOG.md
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: sbom
       - uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
