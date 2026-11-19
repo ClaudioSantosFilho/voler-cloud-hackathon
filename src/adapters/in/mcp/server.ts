@@ -4,7 +4,9 @@ import type { BuscarEditaisAbertos } from '../../../application/ports/in/buscar-
 import type { ConsultarEmpresa } from '../../../application/ports/in/consultar-empresa.js';
 import type { Logger } from '../../../application/ports/out/logger.js';
 import { Metrics } from './metrics.js';
+import type { MatchEditais } from '../../../application/ports/in/match-editais.js';
 import { registerBuscarEditais } from './tools/buscar-editais-abertos.js';
+import { registerMatchEditais } from './tools/match-editais.js';
 import { registerPerfilEmpresa } from './tools/perfil-empresa.js';
 
 export const SERVER_INFO = { name: 'edital-match-pb', version: '0.1.0' } as const;
@@ -14,6 +16,7 @@ export interface McpDeps {
   metrics?: Metrics;
   consultarEmpresa: ConsultarEmpresa;
   buscarEditais: BuscarEditaisAbertos;
+  matchEditais: MatchEditais;
 }
 
 function registerPing(server: McpServer): void {
@@ -43,6 +46,7 @@ export function createMcpServerFactory(deps: McpDeps): () => McpServer {
     registerPing(server);
     registerPerfilEmpresa(server, deps.consultarEmpresa, ctx);
     registerBuscarEditais(server, deps.buscarEditais, ctx);
+    registerMatchEditais(server, deps.matchEditais, ctx);
     return server;
   };
 }

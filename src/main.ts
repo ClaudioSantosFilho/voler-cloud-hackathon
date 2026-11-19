@@ -12,6 +12,7 @@ import { PncpEditalRepository } from './adapters/out/pncp/pncp-edital-repository
 import { BuscarEditaisAbertosUseCase } from './application/use-cases/buscar-editais-abertos.js';
 import { ConsultarEmpresaUseCase } from './application/use-cases/consultar-empresa.js';
 import { EditaisLoader } from './application/use-cases/editais-loader.js';
+import { MatchEditaisUseCase } from './application/use-cases/match-editais.js';
 import { PrazoService } from './application/use-cases/prazo-service.js';
 import { ConfigError, loadConfig, type AppConfig } from './config/env.js';
 
@@ -34,11 +35,14 @@ function compose(config: AppConfig) {
   const loader = new EditaisLoader(editalRepository, cache, systemClock, config.CACHE_TTL_MS);
   const prazos = new PrazoService(calendario, cache, systemClock);
 
+  const consultarEmpresa = new ConsultarEmpresaUseCase(cnpjGateway, cache);
+
   const factory = createMcpServerFactory({
     logger,
     metrics,
-    consultarEmpresa: new ConsultarEmpresaUseCase(cnpjGateway, cache),
+    consultarEmpresa,
     buscarEditais: new BuscarEditaisAbertosUseCase(loader, prazos),
+    matchEditais: new MatchEditaisUseCase(consultarEmpresa, loader, prazos, config.MATCH_MIN_SCORE),
   });
   return { logger, cache, metrics, factory };
 }

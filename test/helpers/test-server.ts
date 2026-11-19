@@ -3,6 +3,7 @@ import { Metrics } from '../../src/adapters/in/mcp/metrics.js';
 import { BuscarEditaisAbertosUseCase } from '../../src/application/use-cases/buscar-editais-abertos.js';
 import { ConsultarEmpresaUseCase } from '../../src/application/use-cases/consultar-empresa.js';
 import { EditaisLoader } from '../../src/application/use-cases/editais-loader.js';
+import { MatchEditaisUseCase } from '../../src/application/use-cases/match-editais.js';
 import { PrazoService } from '../../src/application/use-cases/prazo-service.js';
 import type { Edital } from '../../src/domain/edital/edital.js';
 import type { Empresa } from '../../src/domain/empresa/empresa.js';
@@ -32,11 +33,13 @@ export function buildTestServer(options: TestServerOptions = {}) {
   const metrics = new Metrics();
   const loader = new EditaisLoader(editalRepository, cache, clock);
   const prazos = new PrazoService(calendario, cache, clock);
+  const consultarEmpresa = new ConsultarEmpresaUseCase(cnpjGateway, cache);
   const factory = createMcpServerFactory({
     logger: silentLogger,
     metrics,
-    consultarEmpresa: new ConsultarEmpresaUseCase(cnpjGateway, cache),
+    consultarEmpresa,
     buscarEditais: new BuscarEditaisAbertosUseCase(loader, prazos),
+    matchEditais: new MatchEditaisUseCase(consultarEmpresa, loader, prazos, 0.2),
   });
   return { factory, cnpjGateway, editalRepository, calendario, metrics };
 }
