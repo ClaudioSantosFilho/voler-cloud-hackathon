@@ -15,6 +15,9 @@ export interface HttpResult {
   body: unknown;
 }
 
+/** Identifica o cliente às APIs públicas, sem dados pessoais. */
+const USER_AGENT = 'edital-match-pb/0.1 (servidor MCP de codigo aberto)';
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /** Cliente HTTP GET-only (RN08) com timeout, retry exponencial e erro identificando a fonte. */
@@ -33,13 +36,18 @@ export class HttpClient {
   }
 
   /** Retorna status e corpo JSON para 2xx/4xx; lança SourceUnavailableError para falhas finais. */
-  async getJson(url: string): Promise<HttpResult> {
+  async getJson(url: string, deadline = Infinity): Promise<HttpResult> {
     let lastError = 'erro desconhecido';
     for (let attempt = 0; attempt <= this.retries; attempt++) {
       if (attempt > 0) await sleep(this.backoffMs * 2 ** (attempt - 1));
       const started = Date.now();
+      const timeoutMs = Math.min(this.options.timeoutMs, deadline - started);
+      if (timeoutMs <= 0) {
+        lastError = 'tempo limite da consulta';
+        break;
+      }
       try {
-        const result = await this.once(url);
+        const result = await this.once(url, timeoutMs);
         this.log(result.status, started);
         if (!isRetryable(result.status)) return result;
         lastError = `HTTP ${result.status}`;
@@ -51,10 +59,10 @@ export class HttpClient {
     throw new SourceUnavailableError(this.source, `indisponível (${lastError})`);
   }
 
-  private async once(url: string): Promise<HttpResult> {
+  private async once(url: string, timeoutMs: number): Promise<HttpResult> {
     const response = await this.fetchFn(url, {
-      headers: { accept: 'application/json' },
-      signal: AbortSignal.timeout(this.options.timeoutMs),
+      headers: { accept: 'application/json', 'user-agent': USER_AGENT },
+      signal: AbortSignal.timeout(timeoutMs),
     });
     const text = await response.text();
     return { status: response.status, body: parseJson(text) };
