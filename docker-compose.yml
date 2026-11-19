@@ -1,0 +1,17 @@
+services:
+  edital-match-pb:
+    build: .
+    image: edital-match-pb:local
+    environment:
+      TRANSPORT: http
+      HOST: 0.0.0.0
+      PORT: ${PORT:-3000}
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-60}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    ports:
+      - '127.0.0.1:${PORT:-3000}:${PORT:-3000}'
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped

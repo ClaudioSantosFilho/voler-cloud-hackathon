@@ -15,6 +15,8 @@ const csv = z
 export const envSchema = z.object({
   TRANSPORT: z.enum(['stdio', 'http']).default('stdio'),
   PORT: intFromEnv(3000),
+  /** Interface de escuta no modo http. Em contêiner, use 0.0.0.0. */
+  HOST: z.string().default('127.0.0.1'),
   PNCP_BASE_URL: z.url().default('https://pncp.gov.br/api/consulta'),
   BRASILAPI_BASE_URL: z.url().default('https://brasilapi.com.br/api'),
   IBGE_BASE_URL: z.url().default('https://servicodados.ibge.gov.br/api/v1'),

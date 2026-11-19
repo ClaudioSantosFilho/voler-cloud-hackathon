@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
+import { createHttpServer } from './adapters/in/http/http-server.js';
 import { Metrics } from './adapters/in/mcp/metrics.js';
 import { createMcpServerFactory } from './adapters/in/mcp/server.js';
 import { BrasilApiCalendarioGateway } from './adapters/out/brasilapi/brasilapi-calendario-gateway.js';
@@ -50,13 +51,30 @@ async function main(): Promise<void> {
     ...process.env,
     ...(process.argv.includes('--demo') ? { DEMO_MODE: 'true' } : {}),
   });
-  const { logger, factory } = await compose(config);
-  serveStdio(factory, { onerror: (e) => logger.error(e.message, { status: 'error' }) });
-  logger.info('servidor MCP iniciado', {
-    transport: 'stdio',
+  const app = await compose(config);
+  if (config.TRANSPORT === 'http') startHttp(config, app);
+  else
+    serveStdio(app.factory, { onerror: (e) => app.logger.error(e.message, { status: 'error' }) });
+  app.logger.info('servidor MCP iniciado', {
+    transport: config.TRANSPORT,
     status: 'ok',
     demo: config.DEMO_MODE,
   });
+}
+
+function startHttp(config: AppConfig, app: Awaited<ReturnType<typeof compose>>): void {
+  const server = createHttpServer({
+    factory: app.factory,
+    logger: app.logger,
+    metrics: app.metrics,
+    cacheStats: () => ({ hits: app.cache.hits, misses: app.cache.misses }),
+    allowedHosts: config.ALLOWED_HOSTS,
+    rateLimitPerMinute: config.RATE_LIMIT_PER_MINUTE,
+  });
+  server.listen(config.PORT, config.HOST, () =>
+    app.logger.info('http ouvindo', { host: config.HOST, port: config.PORT, path: '/mcp' }),
+  );
+  process.once('SIGTERM', () => server.close());
 }
 
 main().catch((error: unknown) => {
