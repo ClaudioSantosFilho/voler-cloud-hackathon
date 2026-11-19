@@ -1,0 +1,262 @@
+[
+  {
+    "numeroControlePNCP": "10000000000101-1-000001/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 1,
+    "orgaoEntidade": {
+      "cnpj": "10000000000101",
+      "razaoSocial": "PREFEITURA MUNICIPAL DE JOAO PESSOA (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "João Pessoa",
+      "codigoIbge": "2507507",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DE JOAO PESSOA (FICTICIO)"
+    },
+    "modalidadeId": 6,
+    "modalidadeNome": "Pregão - Eletrônico",
+    "objetoCompra": "Registro de preços para fornecimento de refeições prontas tipo marmitex (quentinhas) para servidores da saúde",
+    "valorTotalEstimado": 85000,
+    "dataAberturaProposta": "2026-11-10T08:00:00",
+    "dataEncerramentoProposta": "2027-03-15T09:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "10000000000202-1-000002/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 2,
+    "orgaoEntidade": {
+      "cnpj": "10000000000202",
+      "razaoSocial": "PREFEITURA MUNICIPAL DE CAMPINA GRANDE (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "Campina Grande",
+      "codigoIbge": "2504009",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DE CAMPINA GRANDE (FICTICIO)"
+    },
+    "modalidadeId": 8,
+    "modalidadeNome": "Dispensa de Licitação",
+    "objetoCompra": "Contratação de empresa para fornecimento de lanches e coffee break para eventos da secretaria de educação",
+    "valorTotalEstimado": 12000,
+    "dataAberturaProposta": "2026-11-12T08:00:00",
+    "dataEncerramentoProposta": "2027-02-26T17:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "10000000000101-1-000003/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 3,
+    "orgaoEntidade": {
+      "cnpj": "10000000000101",
+      "razaoSocial": "PREFEITURA MUNICIPAL DE JOAO PESSOA (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "João Pessoa",
+      "codigoIbge": "2507507",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DE JOAO PESSOA (FICTICIO)"
+    },
+    "modalidadeId": 6,
+    "modalidadeNome": "Pregão - Eletrônico",
+    "objetoCompra": "Contratação de serviços continuados de limpeza, asseio e conservação predial",
+    "valorTotalEstimado": 240000,
+    "dataAberturaProposta": "2026-11-05T08:00:00",
+    "dataEncerramentoProposta": "2027-03-02T09:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "10000000000303-1-000004/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 4,
+    "orgaoEntidade": {
+      "cnpj": "10000000000303",
+      "razaoSocial": "PREFEITURA MUNICIPAL DE PATOS (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "Patos",
+      "codigoIbge": "2510808",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DE PATOS (FICTICIO)"
+    },
+    "modalidadeId": 6,
+    "modalidadeNome": "Pregão - Eletrônico",
+    "objetoCompra": "Aquisição de material de limpeza e produtos de higienização para escolas municipais",
+    "valorTotalEstimado": 30000,
+    "dataAberturaProposta": "2026-11-11T08:00:00",
+    "dataEncerramentoProposta": "2027-02-19T10:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "10000000000404-1-000005/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 5,
+    "orgaoEntidade": {
+      "cnpj": "10000000000404",
+      "razaoSocial": "CAMARA MUNICIPAL DE CABEDELO (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "Cabedelo",
+      "codigoIbge": "2503209",
+      "nomeUnidade": "CAMARA MUNICIPAL DE CABEDELO (FICTICIO)"
+    },
+    "modalidadeId": 6,
+    "modalidadeNome": "Pregão - Eletrônico",
+    "objetoCompra": "Contratação de empresa para desenvolvimento de sistema web e manutenção de software legislativo",
+    "valorTotalEstimado": 150000,
+    "dataAberturaProposta": "2026-11-15T08:00:00",
+    "dataEncerramentoProposta": "2027-04-06T09:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "10000000000505-1-000006/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 6,
+    "orgaoEntidade": {
+      "cnpj": "10000000000505",
+      "razaoSocial": "PREFEITURA MUNICIPAL DE SANTA RITA (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "Santa Rita",
+      "codigoIbge": "2513703",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DE SANTA RITA (FICTICIO)"
+    },
+    "modalidadeId": 8,
+    "modalidadeNome": "Dispensa de Licitação",
+    "objetoCompra": "Serviço de manutenção de computadores, impressoras e suporte técnico de informática",
+    "valorTotalEstimado": 18000,
+    "dataAberturaProposta": "2026-11-16T08:00:00",
+    "dataEncerramentoProposta": "2027-02-12T12:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "10000000000606-1-000007/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 7,
+    "orgaoEntidade": {
+      "cnpj": "10000000000606",
+      "razaoSocial": "PREFEITURA MUNICIPAL DE BAYEUX (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "Bayeux",
+      "codigoIbge": "2501807",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DE BAYEUX (FICTICIO)"
+    },
+    "modalidadeId": 6,
+    "modalidadeNome": "Pregão - Eletrônico",
+    "objetoCompra": "Aquisição de pneus e câmaras de ar para a frota municipal",
+    "valorTotalEstimado": 60000,
+    "dataAberturaProposta": "2026-11-09T08:00:00",
+    "dataEncerramentoProposta": "2027-03-09T09:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "10000000000101-1-000008/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 8,
+    "orgaoEntidade": {
+      "cnpj": "10000000000101",
+      "razaoSocial": "PREFEITURA MUNICIPAL DE JOAO PESSOA (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "João Pessoa",
+      "codigoIbge": "2507507",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DE JOAO PESSOA (FICTICIO)"
+    },
+    "modalidadeId": 6,
+    "modalidadeNome": "Pregão - Eletrônico",
+    "objetoCompra": "Fornecimento de refeições para o restaurante popular",
+    "valorTotalEstimado": 95000,
+    "dataAberturaProposta": "2025-09-01T08:00:00",
+    "dataEncerramentoProposta": "2025-10-10T09:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "20000000000101-1-000009/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 9,
+    "orgaoEntidade": {
+      "cnpj": "20000000000101",
+      "razaoSocial": "PREFEITURA MUNICIPAL DO RECIFE (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PE",
+      "ufNome": "Pernambuco",
+      "municipioNome": "Recife",
+      "codigoIbge": "2611606",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DO RECIFE (FICTICIO)"
+    },
+    "modalidadeId": 6,
+    "modalidadeNome": "Pregão - Eletrônico",
+    "objetoCompra": "Serviços de limpeza e conservação de unidades de saúde",
+    "valorTotalEstimado": 300000,
+    "dataAberturaProposta": "2026-11-10T08:00:00",
+    "dataEncerramentoProposta": "2027-03-20T09:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  },
+  {
+    "numeroControlePNCP": "10000000000202-1-000010/2026",
+    "anoCompra": 2026,
+    "sequencialCompra": 10,
+    "orgaoEntidade": {
+      "cnpj": "10000000000202",
+      "razaoSocial": "PREFEITURA MUNICIPAL DE CAMPINA GRANDE (FICTICIO)",
+      "poderId": "E",
+      "esferaId": "M"
+    },
+    "unidadeOrgao": {
+      "ufSigla": "PB",
+      "ufNome": "Paraíba",
+      "municipioNome": "Campina Grande",
+      "codigoIbge": "2504009",
+      "nomeUnidade": "PREFEITURA MUNICIPAL DE CAMPINA GRANDE (FICTICIO)"
+    },
+    "modalidadeId": 6,
+    "modalidadeNome": "Pregão - Eletrônico",
+    "objetoCompra": "Licenciamento de software de gestão escolar",
+    "valorTotalEstimado": 70000,
+    "dataAberturaProposta": "2025-08-01T08:00:00",
+    "dataEncerramentoProposta": "2025-09-15T09:00:00",
+    "situacaoCompraNome": "Divulgada no PNCP",
+    "linkSistemaOrigem": null
+  }
+]

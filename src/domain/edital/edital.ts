@@ -49,3 +49,8 @@ export function linkOficialPncp(id: string): string {
   const { cnpjOrgao, ano, sequencial } = parseIdPncp(id);
   return `https://pncp.gov.br/app/editais/${cnpjOrgao}/${ano}/${sequencial}`;
 }
+
+/** Edital com o prazo em dias úteis restantes (RN07). */
+export interface EditalComPrazo extends Edital {
+  diasUteisRestantes: number;
+}

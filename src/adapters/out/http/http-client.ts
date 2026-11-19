@@ -3,7 +3,7 @@ import { SourceUnavailableError } from '../../../domain/errors.js';
 
 export interface HttpClientOptions {
   timeoutMs: number;
-  /** Tentativas extras após a primeira, só para 5xx e erros de rede (RNF02). */
+  /** Tentativas extras após a primeira, só para 5xx, 429 (limite da fonte) e erros de rede (RNF02). */
   retries?: number;
   backoffMs?: number;
   logger?: Logger;
@@ -41,7 +41,7 @@ export class HttpClient {
       try {
         const result = await this.once(url);
         this.log(result.status, started);
-        if (result.status < 500) return result;
+        if (!isRetryable(result.status)) return result;
         lastError = `HTTP ${result.status}`;
       } catch (error) {
         lastError = describe(error);
@@ -81,4 +81,8 @@ function parseJson(text: string): unknown {
 function describe(error: unknown): string {
   if (error instanceof Error && error.name === 'TimeoutError') return 'timeout';
   return error instanceof Error ? error.message : String(error);
+}
+
+function isRetryable(status: number): boolean {
+  return status >= 500 || status === 429;
 }
