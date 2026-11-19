@@ -92,3 +92,9 @@ export function formatRodape(fontes: string[], avisos: string[]): string {
   for (const aviso of avisos) linhas.push(`Aviso: ${aviso}`);
   return linhas.join('\n');
 }
+
+/** Aceita texto ou número (alguns clientes convertem dígitos em número e perdem o zero à esquerda). */
+export const cnpjInput = z
+  .union([z.string().max(32), z.number().int().nonnegative()])
+  .transform((v) => (typeof v === 'number' ? String(v).padStart(14, '0') : v))
+  .describe('CNPJ com ou sem máscara, ex.: 12.345.678/0001-95');

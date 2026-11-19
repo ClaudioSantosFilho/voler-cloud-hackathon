@@ -2,7 +2,7 @@ import type { McpServer } from '@modelcontextprotocol/server';
 import { z } from 'zod';
 import type { ConsultarEmpresa } from '../../../../application/ports/in/consultar-empresa.js';
 import type { Empresa } from '../../../../domain/empresa/empresa.js';
-import { cnaeOutput, READ_ONLY } from '../schemas.js';
+import { cnaeOutput, cnpjInput, READ_ONLY } from '../schemas.js';
 import { runTool, type ToolContext } from '../tool-runner.js';
 
 const output = z.object({
@@ -39,7 +39,7 @@ export function registerPerfilEmpresa(
       description:
         'Consulta razão social, situação cadastral e atividades (CNAE principal e secundários) de um CNPJ.',
       inputSchema: z.object({
-        cnpj: z.string().max(32).describe('CNPJ com ou sem máscara, ex.: 12.345.678/0001-95'),
+        cnpj: cnpjInput,
       }),
       outputSchema: output,
       annotations: READ_ONLY,

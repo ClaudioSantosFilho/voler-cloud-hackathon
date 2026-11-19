@@ -11,7 +11,7 @@ import {
 } from '../../helpers/fakes.js';
 import { NOW, editaisFixture } from '../../helpers/fixtures.js';
 
-function setup(feriados = [{ data: '2027-02-16', nome: 'Carnaval' }]) {
+function setup(feriados = [{ data: '2027-02-09', nome: 'Carnaval' }]) {
   const repo = new FakeEditalRepository(editaisFixture());
   const calendario = new FakeCalendario(feriados);
   const cache = new FakeCache();
@@ -64,7 +64,7 @@ describe('BuscarEditaisAbertos (RF02)', () => {
     const dias = async (feriados: { data: string; nome: string }[]) =>
       (await setup(feriados).useCase.execute({ uf: 'PB' })).itens.find((e) => e.idPncp === id)
         ?.diasUteisRestantes ?? 0;
-    expect(await dias([{ data: '2027-02-16', nome: 'Carnaval' }])).toBe((await dias([])) - 1);
+    expect(await dias([{ data: '2027-02-09', nome: 'Carnaval' }])).toBe((await dias([])) - 1);
   });
 
   it('PNCP fora do ar propaga erro identificando a fonte', async () => {
