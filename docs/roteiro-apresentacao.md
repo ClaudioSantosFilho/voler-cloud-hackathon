@@ -35,14 +35,14 @@ Diferenciais: gratuito, sem chave de API, só dados públicos (PNCP, BrasilAPI, 
 
 Falar enquanto o assistente responde; não esperar em silêncio.
 
-| Passo | Pergunta no cliente                                   | O que destacar                                                       |
-| ----- | ----------------------------------------------------- | -------------------------------------------------------------------- |
-| 1     | "Qual o perfil do CNPJ 12.345.678/0001-95?"           | `perfil_empresa`: MEI de marmitas, situação ativa, CNAE lido.        |
-| 2     | "Quais licitações combinam com essa empresa?"         | `match_editais`: ranking com score e motivo (`marmit`, `refeic`).    |
-| 3     | "E para o CNPJ 34567890000130?"                       | Mesmo fluxo, empresa de TI: resultado totalmente diferente.          |
-| 4     | "Detalhe o edital 10000000000303-1-000004/2026"       | `detalhar_edital`: prazo, valor estimado, próximo passo.             |
+| Passo | Pergunta no cliente                                   | O que destacar                                                        |
+| ----- | ----------------------------------------------------- | --------------------------------------------------------------------- |
+| 1     | "Qual o perfil do CNPJ 12.345.678/0001-95?"           | `perfil_empresa`: MEI de marmitas, situação ativa, CNAE lido.         |
+| 2     | "Quais licitações combinam com essa empresa?"         | `match_editais`: ranking com score e motivo (`marmit`, `refeic`).     |
+| 3     | "E para o CNPJ 34567890000130?"                       | Mesmo fluxo, empresa de TI: resultado totalmente diferente.           |
+| 4     | "Detalhe o edital 10000000000303-1-000004/2026"       | `detalhar_edital`: prazo, valor estimado, próximo passo.              |
 | 5     | Usar o prompt `resumo_para_mei` com o mesmo `id_pncp` | Edital em linguagem simples + checklist de documentos de habilitação. |
-| 6     | "Quantos dias úteis faltam até 19/02/2027 na PB?"     | `dias_uteis_ate`: considera feriados nacionais e estaduais.          |
+| 6     | "Quantos dias úteis faltam até 19/02/2027 na PB?"     | `dias_uteis_ate`: considera feriados nacionais e estaduais.           |
 
 Se sobrar tempo e a rede estiver boa: trocar para o modo real e repetir o passo 2 com dados do PNCP.
 
@@ -74,11 +74,11 @@ Encerrar com: nome do projeto, link do repositório e "obrigado".
 
 ## Perguntas prováveis
 
-| Pergunta                                   | Resposta curta                                                                                          |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| "Por que não usar LLM para o match?"       | Precisamos explicar cada resultado e testá-lo. Termos por CNAE são reproduzíveis; o LLM entra só no resumo. |
-| "E os falsos positivos?"                   | Todo resultado traz o motivo; o usuário vê por que entrou. Score mínimo configurável (`MATCH_MIN_SCORE`). |
-| "O PNCP aguenta?"                          | Há cache de 10 min e orçamento de 8 s por consulta; se o PNCP limitar (HTTP 429), a resposta vem parcial com aviso. |
-| "Guarda dados da empresa?"                 | Não. Nada vai para disco; o cache é em memória e o CNPJ é mascarado nos logs.                           |
-| "Funciona fora da Paraíba?"                | A busca aceita outras UFs; os feriados estaduais estão cadastrados só para a PB por enquanto.           |
-| "Substitui um advogado ou contador?"       | Não. O match é informativo e não substitui a leitura do edital nem a análise jurídica.                  |
+| Pergunta                             | Resposta curta                                                                                                      |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| "Por que não usar LLM para o match?" | Precisamos explicar cada resultado e testá-lo. Termos por CNAE são reproduzíveis; o LLM entra só no resumo.         |
+| "E os falsos positivos?"             | Todo resultado traz o motivo; o usuário vê por que entrou. Score mínimo configurável (`MATCH_MIN_SCORE`).           |
+| "O PNCP aguenta?"                    | Há cache de 10 min e orçamento de 8 s por consulta; se o PNCP limitar (HTTP 429), a resposta vem parcial com aviso. |
+| "Guarda dados da empresa?"           | Não. Nada vai para disco; o cache é em memória e o CNPJ é mascarado nos logs.                                       |
+| "Funciona fora da Paraíba?"          | A busca aceita outras UFs; os feriados estaduais estão cadastrados só para a PB por enquanto.                       |
+| "Substitui um advogado ou contador?" | Não. O match é informativo e não substitui a leitura do edital nem a análise jurídica.                              |
