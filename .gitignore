@@ -3,3 +3,10 @@
 .claude*
 .mcp.json*
 CLAUDE.MD*
+
+node_modules/
+dist/
+coverage/
+.env
+*.log
+sbom.*.json
