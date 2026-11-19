@@ -1,0 +1,182 @@
+{
+  "data": [
+    {
+      "valorTotalHomologado": null,
+      "orgaoEntidade": {
+        "cnpj": "08761140000194",
+        "razaoSocial": "SECRETARIA DE ESTADO DA ADMINISTRACAO",
+        "poderId": "E",
+        "esferaId": "E"
+      },
+      "dataInclusao": "2026-06-17T07:16:09",
+      "dataAtualizacao": "2026-11-11T07:00:55",
+      "numeroControlePNCP": "08761140000194-1-000180/2026",
+      "anoCompra": 2026,
+      "srp": true,
+      "sequencialCompra": 180,
+      "numeroCompra": "90084",
+      "objetoCompra": "Registro de preços para serviço de outsourcing de impressão",
+      "dataAberturaProposta": "2026-11-11T08:00:00",
+      "dataEncerramentoProposta": "2026-11-26T09:00:00",
+      "unidadeOrgao": {
+        "ufNome": "Paraíba",
+        "ufSigla": "PB",
+        "municipioNome": "João Pessoa",
+        "codigoIbge": "2507507",
+        "nomeUnidade": "EPB-SECRETARIA ESTADO D ADMINISTRAÇÃO PARAIBA",
+        "codigoUnidade": "925302"
+      },
+      "unidadeSubRogada": null,
+      "amparoLegal": {
+        "nome": "Lei 14.133/2021, Art. 28, I",
+        "descricao": "pregão: modalidade de licitação obrigatória para aquisição de bens e serviços comuns",
+        "codigo": 1
+      },
+      "linkSistemaOrigem": "https://cnetmobile.estaleiro.serpro.gov.br/comprasnet-web/public/landing?destino=acompanhamento-compra&compra=92530205900842026",
+      "linkProcessoEletronico": null,
+      "justificativaPresencial": null,
+      "emendaParlamentar": null,
+      "processo": "190000001542025",
+      "orgaoSubRogado": null,
+      "informacaoComplementar": " Para as respostas de esclarecimentos e impugnações deste edital acesse o link: https://cnetmobile.estaleiro.serpro.gov.br/comprasnet-web/public/landing?destino=quadro-informativo&compra=92530205900842026",
+      "dataAtualizacaoGlobal": "2026-11-11T07:01:04",
+      "dataPublicacaoPncp": "2026-06-17T07:16:09",
+      "valorTotalEstimado": 47200,
+      "modalidadeId": 6,
+      "modalidadeNome": "Pregão - Eletrônico",
+      "modoDisputaId": 3,
+      "modoDisputaNome": "Aberto-Fechado",
+      "tipoInstrumentoConvocatorioCodigo": 1,
+      "tipoInstrumentoConvocatorioNome": "Edital",
+      "fontesOrcamentarias": [],
+      "situacaoCompraId": 1,
+      "situacaoCompraNome": "Divulgada no PNCP",
+      "usuarioNome": "Compras.gov.br"
+    },
+    {
+      "valorTotalHomologado": null,
+      "orgaoEntidade": {
+        "cnpj": "09283185000163",
+        "razaoSocial": "JOAO PESSOA TRIBUNAL DE JUSTICA DO ESTADO DA PARAIBA",
+        "poderId": "J",
+        "esferaId": "E"
+      },
+      "dataInclusao": "2026-07-23T15:11:57",
+      "dataAtualizacao": "2026-08-07T16:50:12",
+      "numeroControlePNCP": "09283185000163-1-000033/2026",
+      "anoCompra": 2026,
+      "srp": true,
+      "sequencialCompra": 33,
+      "numeroCompra": "17",
+      "objetoCompra": "Registro de Preços para futura e eventual aquisição de motobombas, com o objetivo de promover o abastecimento de água das unidades administrativas e forenses do Tribunal de Justiça do Estado da Paraíba, conforme especificações técnicas, quantidades, exigências e estimativas estabelecidas neste Termo de Referência",
+      "dataAberturaProposta": "2026-08-10T08:00:00",
+      "dataEncerramentoProposta": "2026-12-18T09:00:00",
+      "unidadeOrgao": {
+        "ufNome": "Paraíba",
+        "ufSigla": "PB",
+        "municipioNome": "João Pessoa",
+        "codigoIbge": "2507507",
+        "nomeUnidade": "TRIBUNAL DE JUSTIçA DO ESTADO DA PARAíBA",
+        "codigoUnidade": "926222"
+      },
+      "unidadeSubRogada": null,
+      "amparoLegal": {
+        "nome": "Lei 14.133/2021, Art. 28, I",
+        "descricao": "pregão: modalidade de licitação obrigatória para aquisição de bens e serviços comuns",
+        "codigo": 1
+      },
+      "linkSistemaOrigem": "https://cnetmobile.estaleiro.serpro.gov.br/comprasnet-web/public/compras/acompanhamento-compra?compra=92622205000172026",
+      "linkProcessoEletronico": "https://sei.tjpb.jus.br",
+      "justificativaPresencial": null,
+      "emendaParlamentar": null,
+      "processo": "002749-43.2026.8.15",
+      "orgaoSubRogado": null,
+      "informacaoComplementar": null,
+      "dataAtualizacaoGlobal": "2026-08-07T16:50:12",
+      "dataPublicacaoPncp": "2026-07-23T15:11:57",
+      "valorTotalEstimado": 258493.64,
+      "modalidadeId": 6,
+      "modalidadeNome": "Pregão - Eletrônico",
+      "modoDisputaId": 1,
+      "modoDisputaNome": "Aberto",
+      "tipoInstrumentoConvocatorioCodigo": 1,
+      "tipoInstrumentoConvocatorioNome": "Edital",
+      "fontesOrcamentarias": [
+        {
+          "codigo": 3,
+          "nome": "Estadual",
+          "descricao": "Recurso orçamentário estadual disponível e devidamente vinculado à despesa que será realizada.",
+          "dataInclusao": "2026-07-23T15:11:58"
+        }
+      ],
+      "situacaoCompraId": 4,
+      "situacaoCompraNome": "Suspensa",
+      "usuarioNome": "Compras.gov.br"
+    },
+    {
+      "valorTotalHomologado": null,
+      "orgaoEntidade": {
+        "cnpj": "08993917000146",
+        "razaoSocial": "MUNICIPIO DE CAMPINA GRANDE",
+        "poderId": "N",
+        "esferaId": "M"
+      },
+      "dataInclusao": "2026-08-27T10:21:37",
+      "dataAtualizacao": "2026-11-05T09:33:01",
+      "numeroControlePNCP": "08993917000146-1-000193/2026",
+      "anoCompra": 2026,
+      "srp": false,
+      "sequencialCompra": 193,
+      "numeroCompra": "183",
+      "objetoCompra": "Aquisição de aparelhos de raio – x – panorâmico, computador \n(desktopbásico) e impressora a laser para atender as demandas da rede de Saúde Bucal da Secretaria  Municipal de Saúde de Campina Grande – PB",
+      "dataAberturaProposta": "2026-11-06T08:00:00",
+      "dataEncerramentoProposta": "2026-11-24T08:00:00",
+      "unidadeOrgao": {
+        "ufNome": "Paraíba",
+        "ufSigla": "PB",
+        "municipioNome": "Campina Grande",
+        "codigoIbge": "2504009",
+        "nomeUnidade": "MPB - PREFEITURA MUNICIPAL DE CAMPINA GRANDE",
+        "codigoUnidade": "981981"
+      },
+      "unidadeSubRogada": null,
+      "amparoLegal": {
+        "nome": "Lei 14.133/2021, Art. 28, I",
+        "descricao": "pregão: modalidade de licitação obrigatória para aquisição de bens e serviços comuns",
+        "codigo": 1
+      },
+      "linkSistemaOrigem": "https://cnetmobile.estaleiro.serpro.gov.br/comprasnet-web/public/compras/acompanhamento-compra?compra=98198105001832026",
+      "linkProcessoEletronico": "https://cdc.campinagran.de/licitacao.php?id=983",
+      "justificativaPresencial": null,
+      "emendaParlamentar": null,
+      "processo": "766/2024",
+      "orgaoSubRogado": null,
+      "informacaoComplementar": null,
+      "dataAtualizacaoGlobal": "2026-11-05T09:33:01",
+      "dataPublicacaoPncp": "2026-08-27T10:21:37",
+      "valorTotalEstimado": 349142.62,
+      "modalidadeId": 6,
+      "modalidadeNome": "Pregão - Eletrônico",
+      "modoDisputaId": 3,
+      "modoDisputaNome": "Aberto-Fechado",
+      "tipoInstrumentoConvocatorioCodigo": 1,
+      "tipoInstrumentoConvocatorioNome": "Edital",
+      "fontesOrcamentarias": [
+        {
+          "codigo": 4,
+          "nome": "Federal",
+          "descricao": "Recurso orçamentário federal disponível e devidamente vinculado à despesa que será realizada.",
+          "dataInclusao": "2026-08-27T10:21:37"
+        }
+      ],
+      "situacaoCompraId": 1,
+      "situacaoCompraNome": "Divulgada no PNCP",
+      "usuarioNome": "Compras.gov.br"
+    }
+  ],
+  "totalRegistros": 3,
+  "totalPaginas": 1,
+  "numeroPagina": 1,
+  "paginasRestantes": 0,
+  "empty": false
+}
