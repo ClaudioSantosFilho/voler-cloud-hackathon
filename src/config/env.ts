@@ -25,6 +25,10 @@ export const envSchema = z.object({
   LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
   RATE_LIMIT_PER_MINUTE: intFromEnv(60),
   ALLOWED_HOSTS: csv,
+  DEMO_MODE: z
+    .enum(['true', 'false', '1', '0'])
+    .default('false')
+    .transform((v) => v === 'true' || v === '1'),
 });
 
 export type AppConfig = z.infer<typeof envSchema>;

@@ -10,9 +10,9 @@ import { useMswServer } from '../../helpers/msw.js';
 const BASE = 'https://pncp.test/api/consulta';
 const PROPOSTA = `${BASE}/v1/contratacoes/proposta`;
 
-function repo(modalidades = [6], pageSize = 50) {
+function repo(modalidades = [6], pageSize = 50, orcamentoMs?: number) {
   const client = new HttpClient('PNCP', { timeoutMs: 500, retries: 1, backoffMs: 1 });
-  return new PncpEditalRepository(client, { baseUrl: BASE, pageSize, modalidades });
+  return new PncpEditalRepository(client, { baseUrl: BASE, pageSize, modalidades, orcamentoMs });
 }
 
 const item = (n: number, extra: Record<string, unknown> = {}) => ({
@@ -84,6 +84,42 @@ describe('PncpEditalRepository', () => {
     });
     expect(editais).toHaveLength(1);
     expect(avisos[0]).toMatch(/parcial.*Dispensa de Licitação/);
+  });
+
+  it('orçamento de tempo estourado: devolve o que leu e avisa (RNF01)', async () => {
+    const paginas: string[] = [];
+    server.use(
+      http.get(PROPOSTA, async ({ request }) => {
+        paginas.push(new URL(request.url).searchParams.get('pagina') ?? '');
+        await new Promise((r) => setTimeout(r, 30));
+        return HttpResponse.json({ data: [item(paginas.length)], totalPaginas: 3 });
+      }),
+    );
+    const { editais, avisos } = await repo([6], 50, 60).listarAbertos({
+      uf: 'PB',
+      dataFinal: '2026-12-31',
+    });
+    expect(paginas[0]).toBe('1');
+    expect(editais).toHaveLength(1);
+    expect(avisos[0]).toMatch(/tempo limite/);
+  });
+
+  it('consulta modalidades na ordem de prioridade para MEI', async () => {
+    const ordem: string[] = [];
+    server.use(
+      http.get(PROPOSTA, ({ request }) => {
+        ordem.push(new URL(request.url).searchParams.get('codigoModalidadeContratacao') ?? '');
+        return new HttpResponse(null, { status: 204 });
+      }),
+    );
+    const semFiltro = new PncpEditalRepository(new HttpClient('PNCP', { timeoutMs: 500 }), {
+      baseUrl: BASE,
+      pageSize: 50,
+      concorrencia: 1,
+    });
+    await semFiltro.listarAbertos({ uf: 'PB', dataFinal: '2026-12-31' });
+    expect(ordem.slice(0, 2)).toEqual(['8', '6']);
+    expect(ordem).toHaveLength(13);
   });
 
   it('429 (limite do PNCP) é retentado', async () => {

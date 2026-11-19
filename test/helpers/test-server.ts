@@ -37,7 +37,7 @@ export function buildTestServer(options: TestServerOptions = {}) {
   const ports = {
     cnpj: new FakeCnpjGateway(options.empresas ?? []),
     editais: new FakeEditalRepository(options.editais ?? []),
-    calendario: new FakeCalendario([{ data: '2027-02-16', nome: 'Carnaval' }]),
+    calendario: new FakeCalendario([{ data: '2027-02-09', nome: 'Carnaval' }]),
     municipios: new FakeMunicipios(options.municipios ?? []),
     cache: new FakeCache(),
     clock: fixedClock(options.now ?? NOW),

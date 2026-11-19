@@ -6,6 +6,7 @@ import type {
 } from '../../../../application/ports/in/match-editais.js';
 import {
   cnaeOutput,
+  cnpjInput,
   editalOutput,
   formatEditalLinha,
   formatRodape,
@@ -56,7 +57,7 @@ export function registerMatchEditais(
       description:
         'Cruza o CNAE principal e os secundários de um CNPJ com as licitações abertas da UF (padrão PB) e devolve os editais ranqueados por score (0 a 1), com o motivo do match e o prazo em dias úteis.',
       inputSchema: z.object({
-        cnpj: z.string().max(32).describe('CNPJ com ou sem máscara'),
+        cnpj: cnpjInput,
         uf: ufInput,
         incluir_baixo_score: z
           .boolean()
