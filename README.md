@@ -8,8 +8,10 @@ Servidor MCP (Model Context Protocol) em TypeScript que recebe o CNPJ de um MEI 
 
 - [Por que existe](#por-que-existe)
 - [Início rápido](#início-rápido)
+- [Configurar o .env](#configurar-o-env)
 - [Configurar no cliente MCP](#configurar-no-cliente-mcp)
 - [Tools, resources e prompt](#tools-resources-e-prompt)
+- [Passo a passo por funcionalidade](#passo-a-passo-por-funcionalidade)
 - [Como o match funciona](#como-o-match-funciona)
 - [Modo demonstração](#modo-demonstração)
 - [Modo HTTP e Docker](#modo-http-e-docker)
@@ -39,6 +41,57 @@ npm install && npm start
 - Execução: Node.js 20 ou superior.
 - Desenvolvimento e testes: Node.js 22.12 ou superior (versão em `.nvmrc`; Vitest 5 e MSW 3 exigem).
 - Nenhuma chave de API é necessária.
+
+Passo a passo completo, do zero:
+
+1. Instale o Node.js 22.12+ (ou rode `nvm use` para ler o `.nvmrc`).
+2. Clone o repositório e entre na pasta:
+   ```bash
+   git clone <url-do-repositorio> && cd <pasta-do-repositorio>
+   ```
+3. Instale as dependências: `npm install` (também ativa os git hooks do Husky).
+4. (Opcional) Configure o `.env` — veja [Configurar o .env](#configurar-o-env).
+5. Suba o servidor: `npm start` (stdio) ou `npm run seed:demo` (offline, com fixtures).
+6. Conecte um cliente MCP — veja [Configurar no cliente MCP](#configurar-no-cliente-mcp).
+
+## Configurar o .env
+
+Todas as variáveis têm padrão; o `.env` só é necessário para sobrescrever algum valor.
+
+1. Copie o modelo:
+   ```bash
+   cp .env.example .env            # Linux, macOS, Git Bash
+   Copy-Item .env.example .env     # PowerShell
+   ```
+2. Edite só as linhas que quiser mudar e apague as demais (o padrão vale para o que faltar). Exemplo para rodar em HTTP com logs detalhados:
+   ```dotenv
+   TRANSPORT=http
+   PORT=3000
+   LOG_LEVEL=debug
+   ```
+3. Carregue o arquivo ao iniciar. **O servidor não lê o `.env` sozinho**; passe a flag `--env-file` do Node:
+   ```bash
+   npx tsx --env-file=.env src/main.ts      # desenvolvimento
+   node --env-file=.env dist/main.js        # após npm run build
+   ```
+   Alternativa sem arquivo: defina a variável na linha de comando (`TRANSPORT=http npm start` no bash; `$env:TRANSPORT="http"; npm start` no PowerShell).
+4. Confira: valores inválidos derrubam a inicialização com `Configuração inválida: <variável>: <motivo>`.
+5. No Docker Compose, o `.env` da raiz é lido automaticamente, mas só para `PORT`, `RATE_LIMIT_PER_MINUTE` e `LOG_LEVEL` (o resto está fixo em `docker-compose.yml`).
+6. Em clientes MCP (Claude Desktop, Claude Code), prefira o bloco `env` da configuração do servidor:
+   ```json
+   {
+     "mcpServers": {
+       "edital-match-pb": {
+         "command": "npx",
+         "args": ["tsx", "src/main.ts"],
+         "cwd": ".",
+         "env": { "MATCH_MIN_SCORE": "0.3", "LOG_LEVEL": "debug" }
+       }
+     }
+   }
+   ```
+
+O `.env` está no `.gitignore`; nunca o versione. A lista completa de variáveis está em [Variáveis de ambiente](#variáveis-de-ambiente).
 
 ## Configurar no cliente MCP
 
@@ -70,6 +123,94 @@ Inspector: `npx @modelcontextprotocol/inspector npx tsx src/main.ts`
 | prompt                   | `resumo_para_mei` com `id_pncp`                                 | Resume o edital em linguagem simples, com checklist de documentos | usa cache do detalhe |
 
 Todas as tools são somente leitura (`readOnlyHint: true`), validam entrada com Zod e devolvem texto legível + `structuredContent`. Erros voltam como `isError: true` com a fonte que falhou; nunca derrubam o servidor.
+
+## Passo a passo por funcionalidade
+
+Pré-requisito comum: servidor conectado a um cliente MCP (seção anterior). Para testar sem rede, use `npm run seed:demo` e os CNPJs/IDs das fixtures abaixo. Cada passo mostra a pergunta em linguagem natural e a chamada equivalente da tool.
+
+### 1. Consultar o perfil da empresa (`perfil_empresa`)
+
+1. Peça: "Qual o perfil do CNPJ 12.345.678/0001-95?"
+2. O assistente chama `perfil_empresa` com `{ "cnpj": "12.345.678/0001-95" }` (com ou sem máscara).
+3. Confira razão social, situação cadastral, CNAE principal e secundários.
+4. CNPJ com dígito verificador errado volta como erro de validação, sem consultar a BrasilAPI.
+
+### 2. Buscar editais abertos (`buscar_editais_abertos`)
+
+1. Peça: "Liste editais abertos em Patos com a palavra limpeza."
+2. Chamada: `{ "uf": "PB", "municipio": "Patos", "palavras": ["limpeza"] }`.
+3. `municipio` e `palavras` são opcionais; sem eles, vêm todos os editais com proposta aberta na UF.
+4. Para ver os municípios válidos, leia o resource `ibge://municipios/PB`.
+
+### 3. Encontrar editais compatíveis com o CNAE (`match_editais`)
+
+1. Peça: "Quais licitações combinam com o CNPJ 34567890000130?"
+2. Chamada: `{ "cnpj": "34567890000130", "incluir_baixo_score": false }`.
+3. Leia o `score` (0–1) e o `motivo` (termos coincidentes e CNAE de origem) de cada edital.
+4. Para ver também os de score abaixo de `MATCH_MIN_SCORE`, repita com `"incluir_baixo_score": true`.
+
+### 4. Detalhar um edital (`detalhar_edital`)
+
+1. Copie o `id_pncp` de um resultado anterior (ex.: `10000000000303-1-000004/2026` na demo).
+2. Peça: "Detalhe o edital 10000000000303-1-000004/2026."
+3. Chamada: `{ "id_pncp": "10000000000303-1-000004/2026" }`.
+4. Confira órgão, objeto, valor estimado, prazo em dias úteis, link do PNCP e próximo passo.
+
+### 5. Contar dias úteis até uma data (`dias_uteis_ate`)
+
+1. Peça: "Quantos dias úteis faltam até 19/02/2027 na Paraíba?"
+2. Chamada: `{ "data": "2027-02-19", "uf": "PB" }` (data em `AAAA-MM-DD`).
+3. O resultado desconta fins de semana, feriados nacionais (BrasilAPI) e estaduais da PB.
+
+### 6. Resumir o edital para um MEI (prompt `resumo_para_mei`)
+
+1. No cliente MCP, abra a lista de prompts (no Claude Desktop, menu de anexos/"+"; no Claude Code, `/mcp__edital-match-pb__resumo_para_mei`).
+2. Informe o argumento `id_pncp`.
+3. O assistente recebe o detalhe do edital e devolve o resumo em linguagem simples com checklist de documentos de habilitação.
+
+### 7. Consultar tabelas de referência (resources)
+
+1. Anexe o resource no cliente MCP ou peça: "Leia o resource pncp://modalidades."
+2. `pncp://modalidades`: códigos e nomes das modalidades de contratação do PNCP.
+3. `ibge://municipios/PB`: código IBGE e nome dos 223 municípios da Paraíba (só PB).
+
+### 8. Verificar se o servidor está vivo (`ping`)
+
+1. Peça: "Faça ping no edital-match-pb."
+2. Resposta imediata, sem chamar APIs externas.
+
+### 9. Usar via HTTP, sem cliente MCP
+
+1. Suba em HTTP: `TRANSPORT=http npm start` (acrescente `DEMO_MODE=true` para usar fixtures).
+2. Verifique a saúde: `curl http://127.0.0.1:3000/health` → `{"status":"ok"}`.
+3. Liste as tools:
+   ```bash
+   curl -s http://127.0.0.1:3000/mcp \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json, text/event-stream' \
+     -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+   ```
+4. Chame uma tool (troque `name` e `arguments` por qualquer exemplo acima):
+   ```bash
+   curl -s http://127.0.0.1:3000/mcp \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json, text/event-stream' \
+     -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"match_editais","arguments":{"cnpj":"34567890000130"}}}'
+   ```
+5. Veja as métricas: `curl http://127.0.0.1:3000/metrics`.
+
+### 10. Rodar com Docker
+
+1. Opcional: ajuste `PORT`, `LOG_LEVEL` ou `RATE_LIMIT_PER_MINUTE` no `.env`.
+2. Suba: `docker compose up --build`.
+3. Teste: `curl http://127.0.0.1:3000/health`.
+4. Use os mesmos `curl` do item 9. Pare com `docker compose down`.
+
+### 11. Inspecionar com o MCP Inspector
+
+1. Rode `npx @modelcontextprotocol/inspector npx tsx src/main.ts` (acrescente `--demo` ao final para fixtures).
+2. Abra a URL exibida no terminal.
+3. Use as abas Tools, Resources e Prompts para chamar cada funcionalidade com os exemplos acima.
 
 ## Como o match funciona
 
@@ -124,7 +265,7 @@ Em produção, coloque um proxy reverso (Nginx, Cloudflare) com TLS e rate limit
 
 ## Variáveis de ambiente
 
-Todas opcionais; copie `.env.example` para `.env` só se quiser sobrescrever. A configuração é validada no início e falha com mensagem legível.
+Todas opcionais; para usar um `.env`, siga [Configurar o .env](#configurar-o-env). A configuração é validada no início e falha com mensagem legível.
 
 | Variável                | Padrão                                    | Descrição                                                 |
 | ----------------------- | ----------------------------------------- | --------------------------------------------------------- |
